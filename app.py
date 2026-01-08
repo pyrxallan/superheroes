@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify, make_response
+from flask_migrate import Migrate
 from models import db, Hero, Power, HeroPower
 
 app = Flask(__name__)
@@ -7,6 +8,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.json.compact = False
 
 db.init_app(app)
+migrate = Migrate(app, db)
 
 @app.route('/')
 def home():
